@@ -103,8 +103,8 @@ Bạn có thể sử dụng các tài khoản sau để đăng nhập trải ngh
 
 | Vai Trò | Tài Khoản | Mật Khẩu | Quyền Hạn |
 | :--- | :--- | :--- | :--- |
-| **Quản trị viên (Admin)** | `admin` | `admin` (hoặc `1`) | Toàn quyền kiểm soát hệ thống, xem doanh thu và kho xe |
-| **Nhân viên (Staff)** | `staff` | `1` | Lập hóa đơn bán xe, tiếp nhận dịch vụ sửa chữa và khách hàng |
+| **Quản trị viên (Admin)** | `admin` | `admin` (hoặc `123`) | Toàn quyền kiểm soát hệ thống, xem doanh thu và kho xe |
+| **Nhân viên (Staff)** | `staff` | `123` | Lập hóa đơn bán xe, tiếp nhận dịch vụ sửa chữa và khách hàng |
 
 ---
 
