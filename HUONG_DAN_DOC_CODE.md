@@ -102,55 +102,60 @@ public bool AddKhachHang(string tenKH, string sdt, string diaChi, string cccd)
 [DataProvider.cs](file:///Users/turrets/Downloads/honda/honda/DAL/DataProvider.cs) là lớp dùng chung, đảm nhận việc mở kết nối, tự động phân tích tham số `@tenKH`, `@sdt`,... khớp với mảng `object[]` truyền vào, thực thi lệnh và đóng kết nối an toàn để tránh rò rỉ bộ nhớ (connection leaks).
 
 ---
+## 🎯 4. Phân Công Nhiệm Vụ & Hướng Dẫn Đọc Code Cho Từng Thành Viên
 
-## 🎯 4. Hướng Dẫn Đọc Code Theo Nhiệm Vụ Được Giao
+Để dự án chạy đúng tiến độ và không bị giẫm chân lên nhau, nhóm mình sẽ chia vai trò cụ thể như bảng dưới đây. Các bạn hãy tìm đúng tên/vai trò của mình để xem hướng dẫn chi tiết nhé:
 
-Tùy thuộc vào phần việc cậu được phân công, hãy tập trung đọc và phát triển các file tương ứng theo hướng dẫn dưới đây:
+### 📊 Bảng Phân Công Vai Trò Tổng Quan
 
-### 🎨 Nhiệm vụ 1: Thiết kế UI/UX & Tối ưu hóa Giao diện
-*   **Mục tiêu**: Thay đổi bố cục, căn chỉnh controls, tạo hiệu ứng co giãn (responsive), đổi màu sắc/font chữ.
-*   **Các file cần đọc**:
-    *   📂 Các file `.Designer.cs` trong `GUI/` (Ví dụ: `frmCar.Designer.cs`, `frmService.Designer.cs`).
-*   **Bí kíp đọc & code**:
-    *   **TUYỆT ĐỐI KHÔNG** dùng thuộc tính `Location` và `Size` cố định khi muốn responsive. Thay vào đó, hãy thành thạo việc sử dụng các thuộc tính:
-        *   `Anchor`: Neo control vào các cạnh của Form (Ví dụ: GridView nên anchor `Top | Bottom | Left | Right` để tự động kéo giãn khi maximize).
-        *   `Dock`: Đưa control lấp đầy panel (Ví dụ: `Dock = Fill`).
-    *   Font chữ chuẩn hệ thống: `Segoe UI, 11F`.
-    *   Sử dụng các component container như `TableLayoutPanel` hoặc `FlowLayoutPanel` để tạo bố cục lưới tự động căn chỉnh.
+| Thành Viên | Vai Trò / Vị Trí | Nhiệm Vụ Chi Tiết | Các File Chính Cần Phụ Trách & Đọc |
+| :--- | :--- | :--- | :--- |
+| **Thành viên 1**<br>*(Nhóm trưởng)* | **Cấu hình & Tích hợp hệ thống**<br>(System & Integration) | - Khởi tạo repo Git, quản lý nhánh.<br>- Quản lý lớp lõi kết nối CSDL `DataProvider.cs`.<br>- Phân quyền bảo mật (Admin/Staff), điều hướng chính và đăng nhập hệ thống. | - [DataProvider.cs](file:///Users/turrets/Downloads/honda/honda/DAL/DataProvider.cs)<br>- [frmMain.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmMain.cs)<br>- [frmLogin.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmLogin.cs)<br>- `AccountBUS.cs` / `AccountDAL.cs` |
+| **Thành viên 2** | **Thiết kế UI/UX & Giao Diện**<br>(Front-End Developer) | - Thiết kế giao diện phẳng, đẹp mắt.<br>- Cấu hình responsive cho tất cả các Form (co giãn tự động không lệch dòng).<br>- Chuẩn hóa font chữ Segoe UI 11F, bắt sự kiện click và hiển thị trên UI. | - Các file `*.Designer.cs` trong `GUI/`<br>- Các file `*.cs` trong `GUI/` (xử lý hiển thị GridView, ComboBox, Textbox...) |
+| **Thành viên 3** | **Xử lý Nghiệp vụ & Tính toán**<br>(Business Logic Developer) | - Viết toàn bộ hàm kiểm tra dữ liệu đầu vào (Regex kiểm tra SĐT, CCCD).<br>- Viết logic kiểm tra tồn kho trước khi bán, tính toán hóa đơn.<br>- Định dạng dữ liệu trước khi gửi xuống lớp DAL. | - Toàn bộ các lớp trong thư mục `BUS/`<br>- (Ví dụ: `KhachHangBUS.cs`, `CarBUS.cs`, `HoaDonBUS.cs`...) |
+| **Thành viên 4** | **Truy vấn SQL & Cơ sở dữ liệu**<br>(Database Developer) | - Quản lý file [Script.sql](file:///Users/turrets/Downloads/honda/honda/Database/Script.sql).<br>- Viết các câu lệnh SQL tương tác bảng.<br>- Đảm bảo viết câu lệnh SQL có tham số (Parameters) chống tấn công SQL Injection. | - [Script.sql](file:///Users/turrets/Downloads/honda/honda/Database/Script.sql)<br>- Toàn bộ các lớp trong thư mục `DAL/`<br>- (Ví dụ: `KhachHangDAL.cs`, `CarDAL.cs`, `InvoiceDAL.cs`...) |
 
-### 🧠 Nhiệm vụ 2: Viết Logic Nghiệp vụ & Các Quy tắc Tính toán (BUS)
-*   **Mục tiêu**: Xử lý logic như tính thành tiền hóa đơn, kiểm tra định dạng nhập vào, tính doanh thu, kiểm tra số lượng tồn kho trước khi bán.
-*   **Các file cần đọc**:
-    *   📂 Toàn bộ các file trong thư mục `BUS/` (Ví dụ: `HoaDonBUS.cs`, `CarBUS.cs`).
-*   **Bí kíp đọc & code**:
-    *   Dữ liệu từ GUI truyền xuống BUS cần được chuẩn hóa (ví dụ: `.Trim()`, `.ToUpper()`).
-    *   Tất cả các hàm trong BUS phải trả về kiểu dữ liệu đơn giản hoặc có ý nghĩa nghiệp vụ (ví dụ: `bool` cho biết thành công/thất bại, `DataTable` cho dữ liệu bảng, `int` cho số lượng).
-    *   Hãy tham khảo cách kiểm tra định dạng bằng Regex trong `KhachHangBUS.cs` để áp dụng cho các dữ liệu nhạy cảm khác.
+---
 
-### 💾 Nhiệm vụ 3: Tương tác SQL & Cơ sở dữ liệu (DAL)
-*   **Mục tiêu**: Viết truy vấn lấy dữ liệu, lưu dữ liệu mới, cập nhật hoặc xóa thông tin.
-*   **Các file cần đọc**:
-    *   📂 Toàn bộ các file trong thư mục `DAL/` (Ví dụ: `CarDAL.cs`, `PhieuSuaChuaDAL.cs`).
-    *   📂 Lớp dùng chung [DataProvider.cs](file:///Users/turrets/Downloads/honda/honda/DAL/DataProvider.cs).
-*   **Bí kíp đọc & code**:
-    *   **Quy tắc Vàng**: **Không bao giờ cộng chuỗi SQL trực tiếp** (ví dụ: `query = "SELECT * FROM Xe WHERE TenXe = '" + txtTenXe.Text + "'"`). Điều này cực kỳ nguy hiểm. Luôn sử dụng Parameter `@paramName` kết hợp với mảng tham số truyền vào hàm của `DataProvider`.
-    *   Nắm rõ 3 phương thức cốt lõi của `DataProvider`:
-        1.  `ExecuteQuery(query, parameters)`: Dùng cho câu lệnh `SELECT` -> Trả về `DataTable`.
-        2.  `ExecuteNonQuery(query, parameters)`: Dùng cho `INSERT`, `UPDATE`, `DELETE` -> Trả về `int` (số dòng thành công).
-        3.  `ExecuteScalar(query, parameters)`: Dùng cho các hàm tổng hợp như `COUNT(*)`, `SUM(Gia)`, `MAX(Ma)` -> Trả về `object?` (một giá trị duy nhất).
+### 👨‍💻 Hướng Dẫn Đọc Code Chi Tiết Cho Từng Thành Viên:
 
-### 🔐 Nhiệm vụ 4: Quản lý Tài khoản & Phân quyền Hệ thống
-*   **Mục tiêu**: Phân biệt quyền giữa **Admin** (Quản trị viên) và **Staff** (Nhân viên bán hàng).
-*   **Các file cần đọc**:
-    *   [frmLogin.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmLogin.cs): Form đăng nhập.
-    *   [frmMain.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmMain.cs): Form quản trị chính chứa thanh điều hướng.
-    *   `AccountBUS.cs` & `AccountDAL.cs`: Xử lý xác thực tài khoản.
-*   **Bí kíp đọc & code**:
-    *   Khi đăng nhập thành công, vai trò (`Role`: "Admin" hoặc "Staff") và tên tài khoản sẽ được truyền qua constructor của `frmMain`.
-    *   Trong hàm `ApplyPermissions()` của `frmMain.cs`, hệ thống sẽ tự động ẩn/hiển thị hoặc vô hiệu hóa các menu chức năng:
-        *   Nhân viên (`Staff`): Bị ẩn hoàn toàn menu **Thống kê (Dashboard)** và **Quản lý kho xe**. Chỉ được sử dụng chức năng Bán hàng, Dịch vụ sửa chữa và Khách hàng.
-        *   Quản trị (`Admin`): Có toàn quyền sử dụng tất cả chức năng.
+#### 👑 1. Dành cho Thành viên 1 (Nhóm trưởng / System Architecture)
+*   **Mục tiêu**: Quản lý luồng đăng nhập, phân quyền truy cập chức năng cho Nhân viên bán hàng và Admin, kết nối cơ sở dữ liệu dùng chung.
+*   **Chi tiết file cần đọc**:
+    *   [frmLogin.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmLogin.cs) & [frmMain.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmMain.cs): Đọc để hiểu cách truyền tham số `userRole` và `username` từ Form Login sang Form Main.
+    *   Hàm `ApplyPermissions()` trong [frmMain.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmMain.cs): Xem cách ẩn/hiện các nút menu của `Staff` (Nhân viên không được xem Thống kê và Kho xe).
+    *   [DataProvider.cs](file:///Users/turrets/Downloads/honda/honda/DAL/DataProvider.cs): Nơi khởi tạo chuỗi kết nối và các phương thức thực thi SQL cơ bản.
 
+#### 🎨 2. Dành cho Thành viên 2 (Front-End / UI Developer)
+*   **Mục tiêu**: Đảm bảo giao diện đồng bộ, hiển thị mượt mà và co giãn hoàn hảo (responsive layout) khi người dùng phóng to/nhỏ cửa sổ.
+*   **Chi tiết file cần đọc**:
+    *   Tập trung xem cách kéo thả và cài đặt thuộc tính trực tiếp trong file `.Designer.cs` (Ví dụ: [frmCar.Designer.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmCar.Designer.cs), [frmService.Designer.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmService.Designer.cs)).
+*   **Bí kíp thiết kế**:
+    *   **Không bao giờ cố định kích thước**: Luôn sử dụng thuộc tính `Anchor` (Neo vào cạnh trên, dưới, trái, phải) hoặc `Dock = Fill` để điều khiển sự co giãn của lưới dữ liệu (`DataGridView`), các nút bấm (`Button`), và khung nhập dữ liệu (`GroupBox`).
+    *   Bắt các sự kiện hiển thị trên UI: Ví dụ khi chọn 1 dòng trên GridView (`CellClick`) thì tự động đổ thông tin ngược lên các TextBox tương ứng trên giao diện (Đọc hàm `dgv_CellClick` trong các Form).
+
+#### 🧠 3. Dành cho Thành viên 3 (Middle-Tier / BUS Developer)
+*   **Mục tiêu**: Kiểm soát toàn bộ các quy tắc nghiệp vụ, tính hợp lệ của dữ liệu trước khi gửi xuống cơ sở dữ liệu.
+*   **Chi tiết file cần đọc**:
+    *   Toàn bộ thư mục `BUS/`. Tham khảo mẫu tại [KhachHangBUS.cs](file:///Users/turrets/Downloads/honda/honda/BUS/KhachHangBUS.cs).
+*   **Bí kíp xử lý**:
+    *   Khi viết nghiệp vụ cho chức năng Thêm/Sửa: Phải thực hiện kiểm tra dữ liệu trống (`string.IsNullOrWhiteSpace`), kiểm tra định dạng đặc biệt (Số điện thoại bắt buộc bắt đầu bằng `0` và đủ `10` chữ số: `Regex.IsMatch(sdt, @"^0\d{9}$")`).
+    *   Xử lý logic nghiệp vụ nâng cao: Ví dụ kiểm tra xem số lượng xe máy còn trong kho không trước khi lập hóa đơn bán xe.
+
+#### 💾 4. Dành cho Thành viên 4 (Back-End / Database Developer)
+*   **Mục tiêu**: Viết các câu lệnh truy vấn dữ liệu nhanh chóng, chính xác và an toàn tuyệt đối.
+*   **Chi tiết file cần đọc**:
+    *   Toàn bộ các file trong thư mục `DAL/` (Ví dụ: `CarDAL.cs`, `InvoiceDAL.cs`).
+*   **Bí kíp viết SQL**:
+    *   **Bảo mật tuyệt đối**: Tất cả các hàm truy vấn có tham số động từ người dùng nhập vào bắt buộc phải truyền qua mảng tham số của `DataProvider` thay vì cộng chuỗi trực tiếp.
+    *   *Mẫu đúng chuẩn chống SQL Injection*:
+        ```csharp
+        string query = "SELECT * FROM KhachHang WHERE TenKH LIKE @ten";
+        return DataProvider.Instance.ExecuteQuery(query, new object[] { "%" + keyword + "%" });
+        ```
+    *   Cần phối hợp chặt chẽ với Thành viên 3 (BUS) để biết cấu trúc tham số cần truyền và Thành viên 2 (UI) để biết các trường thông tin cần trả về hiển thị trên lưới.
+
+---
 ---
 
 ## 💎 5. Các Quy Ước Lập Trình Quan Trọng (Coding Conventions)
