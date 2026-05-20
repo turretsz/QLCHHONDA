@@ -13,7 +13,7 @@ namespace honda.DAL
             private set { instance = value; }
         }
 
-        private readonly string connectionString = @"Server=np:\\.\pipe\LOCALDB#E3911D1B\tsql\query;Database=HondaManagement;Trusted_Connection=True;TrustServerCertificate=True;";
+        private readonly string connectionString = @"Server=(localdb)\MSSQLLocalDB;Database=HondaManagement;Trusted_Connection=True;TrustServerCertificate=True;";
 
         private DataProvider() { }
 
