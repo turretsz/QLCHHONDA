@@ -104,56 +104,47 @@ public bool AddKhachHang(string tenKH, string sdt, string diaChi, string cccd)
 ---
 ## 🎯 4. Phân Công Nhiệm Vụ & Hướng Dẫn Đọc Code Cho Từng Thành Viên
 
-Để dự án chạy đúng tiến độ và không bị giẫm chân lên nhau, nhóm mình sẽ chia vai trò cụ thể như bảng dưới đây. Các bạn hãy tìm đúng tên/vai trò của mình để xem hướng dẫn chi tiết nhé:
+Để dự án chạy đúng tiến độ và không bị giẫm chân lên nhau, nhóm mình đã thống nhất chia vai trò chi tiết như bảng dưới đây. Các bạn hãy tìm đúng tên của mình để xem hướng dẫn và các file cần phụ trách nhé:
 
-### 📊 Bảng Phân Công Vai Trò Tổng Quan
+### 📊 Bảng Phân Công Nhiệm Vụ Thành Viên
 
-| Thành Viên | Vai Trò / Vị Trí | Nhiệm Vụ Chi Tiết | Các File Chính Cần Phụ Trách & Đọc |
+| Thành Viên | Chức Năng (Module) | Nhiệm Vụ Chi Tiết | Các File Cần Đọc & Phụ Trách |
 | :--- | :--- | :--- | :--- |
-| **Thành viên 1**<br>*(Nhóm trưởng)* | **Cấu hình & Tích hợp hệ thống**<br>(System & Integration) | - Khởi tạo repo Git, quản lý nhánh.<br>- Quản lý lớp lõi kết nối CSDL `DataProvider.cs`.<br>- Phân quyền bảo mật (Admin/Staff), điều hướng chính và đăng nhập hệ thống. | - [DataProvider.cs](file:///Users/turrets/Downloads/honda/honda/DAL/DataProvider.cs)<br>- [frmMain.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmMain.cs)<br>- [frmLogin.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmLogin.cs)<br>- `AccountBUS.cs` / `AccountDAL.cs` |
-| **Thành viên 2** | **Thiết kế UI/UX & Giao Diện**<br>(Front-End Developer) | - Thiết kế giao diện phẳng, đẹp mắt.<br>- Cấu hình responsive cho tất cả các Form (co giãn tự động không lệch dòng).<br>- Chuẩn hóa font chữ Segoe UI 11F, bắt sự kiện click và hiển thị trên UI. | - Các file `*.Designer.cs` trong `GUI/`<br>- Các file `*.cs` trong `GUI/` (xử lý hiển thị GridView, ComboBox, Textbox...) |
-| **Thành viên 3** | **Xử lý Nghiệp vụ & Tính toán**<br>(Business Logic Developer) | - Viết toàn bộ hàm kiểm tra dữ liệu đầu vào (Regex kiểm tra SĐT, CCCD).<br>- Viết logic kiểm tra tồn kho trước khi bán, tính toán hóa đơn.<br>- Định dạng dữ liệu trước khi gửi xuống lớp DAL. | - Toàn bộ các lớp trong thư mục `BUS/`<br>- (Ví dụ: `KhachHangBUS.cs`, `CarBUS.cs`, `HoaDonBUS.cs`...) |
-| **Thành viên 4** | **Truy vấn SQL & Cơ sở dữ liệu**<br>(Database Developer) | - Quản lý file [Script.sql](file:///Users/turrets/Downloads/honda/honda/Database/Script.sql).<br>- Viết các câu lệnh SQL tương tác bảng.<br>- Đảm bảo viết câu lệnh SQL có tham số (Parameters) chống tấn công SQL Injection. | - [Script.sql](file:///Users/turrets/Downloads/honda/honda/Database/Script.sql)<br>- Toàn bộ các lớp trong thư mục `DAL/`<br>- (Ví dụ: `KhachHangDAL.cs`, `CarDAL.cs`, `InvoiceDAL.cs`...) |
+| **Trường** | **Thống kê & Đăng nhập** & **Bảo dưỡng & Dịch vụ** | - Thiết kế Form Login, Form Main (Menu điều hướng phân quyền Staff/Admin).<br>- Viết truy vấn thống kê doanh thu/số lượng xe đã bán cho Dashboard.<br>- Thiết kế Form Phiếu sửa chữa: nhập biển số, nội dung bảo dưỡng, quản lý phụ tùng dịch vụ. | **GUI:**<br>- [frmLogin.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmLogin.cs)<br>- [frmMain.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmMain.cs)<br>- [frmDashboard.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmDashboard.cs)<br>- [frmService.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmService.cs)<br>**BUS & DAL:**<br>- `AccountBUS.cs` / `AccountDAL.cs`<br>- `DashboardBUS.cs` / `DataProvider.cs`<br>- `PhieuSuaChuaBUS.cs` / `PhieuSuaChuaDAL.cs`<br>- `PhuTungBUS.cs` / `PhuTungDAL.cs` |
+| **Ninh** | **Quản lý Kho Xe** | - Thiết kế Form nhập thông tin xe: Tên xe, dòng xe, số khung, số máy, giá nhập, màu sắc.<br>- Đổ danh sách xe máy lên DataGridView và thực hiện CRUD. | **GUI:**<br>- [frmCar.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmCar.cs)<br>- [frmCar.Designer.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmCar.Designer.cs)<br>**BUS & DAL:**<br>- `CarBUS.cs`<br>- `CarDAL.cs` |
+| **Quân** | **Quản lý Khách hàng** | - Thiết kế Form lưu thông tin khách hàng: Họ tên, SĐT, địa chỉ, số CCCD.<br>- Tra cứu lịch sử khách hàng, kiểm tra hợp lệ dữ liệu. | **GUI:**<br>- [frmKhachHang.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmKhachHang.cs)<br>- [frmKhachHang.Designer.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmKhachHang.Designer.cs)<br>**BUS & DAL:**<br>- `KhachHangBUS.cs`<br>- `KhachHangDAL.cs` |
+| **Khoa** | **Bán hàng (Hóa đơn)** | - Thiết kế Form lập hóa đơn bán xe: Chọn xe + Chọn khách hàng -> Tính toán thành tiền, thuế VAT, phí trước bạ.<br>- Lưu trữ và xuất hóa đơn. | **GUI:**<br>- [frmHoaDon.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmHoaDon.cs)<br>- [frmHoaDon.Designer.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmHoaDon.Designer.cs)<br>**BUS & DAL:**<br>- `HoaDonBUS.cs`<br>- `InvoiceDAL.cs` |
 
 ---
 
-### 👨‍💻 Hướng Dẫn Đọc Code Chi Tiết Cho Từng Thành Viên:
+### 👨‍💻 Hướng Dẫn Đọc Code Chi Tiết Cho Từng Bạn:
 
-#### 👑 1. Dành cho Thành viên 1 (Nhóm trưởng / System Architecture)
-*   **Mục tiêu**: Quản lý luồng đăng nhập, phân quyền truy cập chức năng cho Nhân viên bán hàng và Admin, kết nối cơ sở dữ liệu dùng chung.
-*   **Chi tiết file cần đọc**:
-    *   [frmLogin.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmLogin.cs) & [frmMain.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmMain.cs): Đọc để hiểu cách truyền tham số `userRole` và `username` từ Form Login sang Form Main.
-    *   Hàm `ApplyPermissions()` trong [frmMain.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmMain.cs): Xem cách ẩn/hiện các nút menu của `Staff` (Nhân viên không được xem Thống kê và Kho xe).
-    *   [DataProvider.cs](file:///Users/turrets/Downloads/honda/honda/DAL/DataProvider.cs): Nơi khởi tạo chuỗi kết nối và các phương thức thực thi SQL cơ bản.
+#### 👑 1. Hướng dẫn dành riêng cho bạn **Trường**
+*   **Module phụ trách**: *Thống kê & Đăng nhập* + *Bảo dưỡng & Dịch vụ*
+*   **Bí kíp đọc và phát triển**:
+    *   **Phần Đăng nhập & Main**: Xem cách `frmMain.cs` nhận vai trò (`role`) và tên tài khoản từ `frmLogin.cs`. Đọc hàm `ApplyPermissions()` trong `frmMain.cs` để hiểu cơ chế ẩn Menu Thống kê và Kho xe khi tài khoản đăng nhập là nhân viên bán hàng (`Staff`).
+    *   **Phần Thống kê (Dashboard)**: Đọc cách `frmDashboard.cs` gọi lớp `DashboardBUS` để lấy tổng doanh thu, tổng số khách hàng, tổng xe bán và hiển thị biểu đồ qua `System.Windows.Forms.DataVisualization`.
+    *   **Phần Bảo dưỡng & Dịch vụ**: Đọc [frmService.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmService.cs) để hiểu luồng tạo phiếu sửa chữa, gán phụ tùng thay thế và tính tổng chi phí dịch vụ cho khách.
 
-#### 🎨 2. Dành cho Thành viên 2 (Front-End / UI Developer)
-*   **Mục tiêu**: Đảm bảo giao diện đồng bộ, hiển thị mượt mà và co giãn hoàn hảo (responsive layout) khi người dùng phóng to/nhỏ cửa sổ.
-*   **Chi tiết file cần đọc**:
-    *   Tập trung xem cách kéo thả và cài đặt thuộc tính trực tiếp trong file `.Designer.cs` (Ví dụ: [frmCar.Designer.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmCar.Designer.cs), [frmService.Designer.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmService.Designer.cs)).
-*   **Bí kíp thiết kế**:
-    *   **Không bao giờ cố định kích thước**: Luôn sử dụng thuộc tính `Anchor` (Neo vào cạnh trên, dưới, trái, phải) hoặc `Dock = Fill` để điều khiển sự co giãn của lưới dữ liệu (`DataGridView`), các nút bấm (`Button`), và khung nhập dữ liệu (`GroupBox`).
-    *   Bắt các sự kiện hiển thị trên UI: Ví dụ khi chọn 1 dòng trên GridView (`CellClick`) thì tự động đổ thông tin ngược lên các TextBox tương ứng trên giao diện (Đọc hàm `dgv_CellClick` trong các Form).
+#### 🏍️ 2. Hướng dẫn dành riêng cho bạn **Ninh**
+*   **Module phụ trách**: *Quản lý Kho Xe*
+*   **Bí kíp đọc và phát triển**:
+    *   **Giao diện**: Đọc file [frmCar.Designer.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmCar.Designer.cs) để xem cách bố trí các ô nhập liệu (Tên xe, số máy, số khung, màu sắc...).
+    *   **Lưu ý co giãn**: Khi mở form full màn hình, GridView chứa xe phải tự động dãn rộng. Đảm bảo thuộc tính `Anchor` của DataGridView được đặt là `Top | Bottom | Left | Right`.
+    *   **Nghiệp vụ**: Xem `CarBUS.cs` để hiểu cách kiểm tra giá nhập không được âm trước khi thêm xe. Xem `CarDAL.cs` để xem cách viết câu lệnh INSERT/UPDATE thông tin xe máy an toàn.
 
-#### 🧠 3. Dành cho Thành viên 3 (Middle-Tier / BUS Developer)
-*   **Mục tiêu**: Kiểm soát toàn bộ các quy tắc nghiệp vụ, tính hợp lệ của dữ liệu trước khi gửi xuống cơ sở dữ liệu.
-*   **Chi tiết file cần đọc**:
-    *   Toàn bộ thư mục `BUS/`. Tham khảo mẫu tại [KhachHangBUS.cs](file:///Users/turrets/Downloads/honda/honda/BUS/KhachHangBUS.cs).
-*   **Bí kíp xử lý**:
-    *   Khi viết nghiệp vụ cho chức năng Thêm/Sửa: Phải thực hiện kiểm tra dữ liệu trống (`string.IsNullOrWhiteSpace`), kiểm tra định dạng đặc biệt (Số điện thoại bắt buộc bắt đầu bằng `0` và đủ `10` chữ số: `Regex.IsMatch(sdt, @"^0\d{9}$")`).
-    *   Xử lý logic nghiệp vụ nâng cao: Ví dụ kiểm tra xem số lượng xe máy còn trong kho không trước khi lập hóa đơn bán xe.
+#### 👥 3. Hướng dẫn dành riêng cho bạn **Quân**
+*   **Module phụ trách**: *Quản lý Khách hàng*
+*   **Bí kíp đọc và phát triển**:
+    *   **Giao diện**: Đọc file [frmKhachHang.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmKhachHang.cs) để xem các trường: Tên, SĐT, Địa chỉ, CCCD.
+    *   **Xử lý Logic**: Đọc file [KhachHangBUS.cs](file:///Users/turrets/Downloads/honda/honda/BUS/KhachHangBUS.cs) để thấy cách validate Số điện thoại (phải bắt đầu bằng `0`, đủ `10` số) và số CCCD (đủ `12` số) bằng Regex. Bạn Quân cần phối hợp với bạn Khoa để khi bán hàng, bạn Khoa có thể dễ dàng chọn khách hàng đã lưu trong database của bạn Quân.
 
-#### 💾 4. Dành cho Thành viên 4 (Back-End / Database Developer)
-*   **Mục tiêu**: Viết các câu lệnh truy vấn dữ liệu nhanh chóng, chính xác và an toàn tuyệt đối.
-*   **Chi tiết file cần đọc**:
-    *   Toàn bộ các file trong thư mục `DAL/` (Ví dụ: `CarDAL.cs`, `InvoiceDAL.cs`).
-*   **Bí kíp viết SQL**:
-    *   **Bảo mật tuyệt đối**: Tất cả các hàm truy vấn có tham số động từ người dùng nhập vào bắt buộc phải truyền qua mảng tham số của `DataProvider` thay vì cộng chuỗi trực tiếp.
-    *   *Mẫu đúng chuẩn chống SQL Injection*:
-        ```csharp
-        string query = "SELECT * FROM KhachHang WHERE TenKH LIKE @ten";
-        return DataProvider.Instance.ExecuteQuery(query, new object[] { "%" + keyword + "%" });
-        ```
-    *   Cần phối hợp chặt chẽ với Thành viên 3 (BUS) để biết cấu trúc tham số cần truyền và Thành viên 2 (UI) để biết các trường thông tin cần trả về hiển thị trên lưới.
+#### 🧾 4. Hướng dẫn dành riêng cho bạn **Khoa**
+*   **Module phụ trách**: *Bán hàng (Hóa đơn)*
+*   **Bí kíp đọc và phát triển**:
+    *   **Luồng xử lý hóa đơn**: Khi lập hóa đơn bán xe, bạn Khoa cần chọn Khách hàng (lấy từ dữ liệu của Quân) và chọn Xe máy (lấy từ kho xe của Ninh).
+    *   **Tính toán tiền**: Đọc [frmHoaDon.cs](file:///Users/turrets/Downloads/honda/honda/GUI/frmHoaDon.cs) để hiểu cách tính tổng tiền: `Thành tiền = Giá Xe + Thuế VAT (10%) + Phí trước bạ`.
+    *   **Database**: Lớp `InvoiceDAL.cs` sẽ lưu dữ liệu xuống bảng `HoaDon` và bảng `ChiTietHoaDon`. Đọc file này để hiểu cách lưu thông tin giao dịch của khách hàng mua xe máy.
 
 ---
 ---
