@@ -13,8 +13,13 @@ namespace honda.DAL
             private set { instance = value; }
         }
 
-        private readonly string connectionString = @"Server=(localdb)\MSSQLLocalDB;Database=HondaManagement;Trusted_Connection=True;TrustServerCertificate=True;";
+        // ==========================================
+        // MỞ COMMENT DÒNG NÀY NẾU CHẠY TRÊN MÁY CỦA TRƯỜNG (MÁY ẢO MAC)
+        private readonly string connectionString = @"Server=np:\\.\pipe\LOCALDB#E3911D1B\tsql\query;Database=HondaManagement;Trusted_Connection=True;TrustServerCertificate=True;";
 
+        // MỞ COMMENT DÒNG NÀY NẾU CHẠY TRÊN MÁY CỦA NINH, QUÂN, KHOA (MÁY WINDOWS THƯỜNG)
+        // private readonly string connectionString = @"Server=(localdb)\MSSQLLocalDB;Database=HondaManagement;Trusted_Connection=True;TrustServerCertificate=True;";
+        // ==========================================
         private DataProvider() { }
 
         public DataTable ExecuteQuery(string query, object[]? parameter = null)
